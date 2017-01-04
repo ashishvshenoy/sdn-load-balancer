@@ -16,4 +16,11 @@ This application runs atop the Floodlight OpenFlow controller.
 * The following is assumed to hold true in the network:
 	* The network is a connected graph.  In other words, there will always be at least one possible path between every pair of switches.
 	* There is only one physical link between a pair of switches.
-	* Links are undirected. However, be aware that Floodlight maintains a Link object for each direction (i.e., there are two Link objects for each physical link).
+	* Links are undirected.
+
+## Load balancer
+
+* The code for your load balancer application resides in LoadBalancer.java in the edu.wisc.cs.sdn.apps.loadbalancer package. 
+* The LoadBalancerInstance class represents a single distributed load balancer. 
+* Each load balancer instance has a virtual IP address, virtual MAC address, and set of hosts among which TCP connections should be distributed. 
+* The instances class variable in the LoadBalancer class maps a virtual IP address to a specific load balancer instance.
