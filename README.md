@@ -14,7 +14,6 @@ This application runs atop the Floodlight OpenFlow controller.
 * When a host joins the network, both the deviceAdded(...) and linkDiscoveryUpdate(...) event handlers will be called. There are no guarantees on which order these event handlers are called.  Thus, a host may be added but we may not yet know which switch it is linked to. 
 * The isAttachedToSwitch() method in the Host class will return true if we know the switch to which a host is connected, otherwise it will return false. 
 * The following is assumed to hold true in the network:
-
-** The network is a connected graph.  In other words, there will always be at least one possible path between every pair of switches.
-** There is only one physical link between a pair of switches.
-** Links are undirected. However, be aware that Floodlight maintains a Link object for each direction (i.e., there are two Link objects for each physical link).
+	* The network is a connected graph.  In other words, there will always be at least one possible path between every pair of switches.
+	* There is only one physical link between a pair of switches.
+	* Links are undirected. However, be aware that Floodlight maintains a Link object for each direction (i.e., there are two Link objects for each physical link).
