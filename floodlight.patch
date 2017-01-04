@@ -1,0 +1,61 @@
+diff -ru a/src/main/java/net/floodlightcontroller/devicemanager/internal/DeviceManagerImpl.java b/src/main/java/net/floodlightcontroller/devicemanager/internal/DeviceManagerImpl.java
+--- a/src/main/java/net/floodlightcontroller/devicemanager/internal/DeviceManagerImpl.java	2015-04-13 19:58:43.635712423 -0500
++++ b/src/main/java/net/floodlightcontroller/devicemanager/internal/DeviceManagerImpl.java	2015-04-13 19:59:10.695712423 -0500
+@@ -1354,7 +1354,7 @@
+         byte[] senderHardwareAddr = arp.getSenderHardwareAddress();
+         long senderAddr = Ethernet.toLong(senderHardwareAddr);
+ 
+-        if (dlAddr == senderAddr) return;
++        //if (dlAddr == senderAddr) return;
+ 
+         // Ignore broadcast/multicast source
+         if ((senderHardwareAddr[0] & 0x1) != 0)
+diff -ru a/src/main/java/org/openflow/protocol/OFMatch.java b/src/main/java/org/openflow/protocol/OFMatch.java
+--- a/src/main/java/org/openflow/protocol/OFMatch.java	2015-04-13 19:58:43.655712423 -0500
++++ b/src/main/java/org/openflow/protocol/OFMatch.java	2015-04-13 19:59:56.727712423 -0500
+@@ -382,7 +382,7 @@
+                 this.setField(OFOXMFieldType.IPV6_DST, networkDestination);
+                 break;
+             case ETH_TYPE_ARP:
+-                this.setField(OFOXMFieldType.ARP_THA, networkDestination);
++                this.setField(OFOXMFieldType.ARP_TPA, networkDestination);
+                 break;
+         }
+         return this;
+@@ -415,7 +415,7 @@
+                 this.setField(OFOXMFieldType.IPV6_DST, networkDestination, networkMask);
+                 break;
+             case ETH_TYPE_ARP:
+-                this.setField(OFOXMFieldType.ARP_THA, networkDestination, networkMask);
++                this.setField(OFOXMFieldType.ARP_TPA, networkDestination, networkMask);
+                 break;
+         }
+         return this;
+@@ -472,7 +472,7 @@
+                 this.setField(OFOXMFieldType.IPV4_SRC, networkSource);
+                 break;
+             case ETH_TYPE_ARP:
+-                this.setField(OFOXMFieldType.ARP_SHA, networkSource);
++                this.setField(OFOXMFieldType.ARP_SPA, networkSource);
+                 break;
+         }
+         return this;
+@@ -505,7 +505,7 @@
+                 this.setField(OFOXMFieldType.IPV6_SRC, networkSource, networkMask);
+                 break;
+             case ETH_TYPE_ARP:
+-                this.setField(OFOXMFieldType.ARP_SHA, networkSource, networkMask);
++                this.setField(OFOXMFieldType.ARP_SPA, networkSource, networkMask);
+                 break;
+         }
+         return this;
+diff -ru a/src/main/resources/META-INF/services/net.floodlightcontroller.core.module.IFloodlightModule b/src/main/resources/META-INF/services/net.floodlightcontroller.core.module.IFloodlightModule
+--- a/src/main/resources/META-INF/services/net.floodlightcontroller.core.module.IFloodlightModule	2015-04-13 19:58:43.667712423 -0500
++++ b/src/main/resources/META-INF/services/net.floodlightcontroller.core.module.IFloodlightModule	2015-04-13 19:59:10.695712423 -0500
+@@ -26,3 +26,6 @@
+ org.sdnplatform.sync.internal.SyncManager
+ org.sdnplatform.sync.internal.SyncTorture
+ net.floodlightcontroller.devicemanager.internal.DefaultEntityClassifier
++edu.wisc.cs.sdn.apps.l3routing.L3Routing
++edu.wisc.cs.sdn.apps.loadbalancer.LoadBalancer
++edu.wisc.cs.sdn.apps.util.ArpServer

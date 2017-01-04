@@ -1,0 +1,22 @@
+diff -u a/node.py b/node.py
+--- a/node.py	2014-11-03 19:50:48.177235758 -0800
++++ b/node.py	2014-11-03 19:51:52.108428783 -0800
+@@ -952,6 +952,9 @@
+            datapath: userspace or kernel mode (kernel|user)"""
+         Switch.__init__( self, name, **params )
+         self.failMode = failMode
++        protKey = 'protocols'
++        if self.params and protKey in self.params:
++            self.opts += protKey + '=' + self.params[protKey]
+         self.datapath = datapath
+ 
+     @classmethod
+@@ -1027,7 +1030,7 @@
+         if self.datapath == 'user':
+             self.cmd( 'ovs-vsctl set bridge', self,'datapath_type=netdev' )
+         int( self.dpid, 16 ) # DPID must be a hex string
+-        self.cmd( 'ovs-vsctl -- set Bridge', self,
++        self.cmd( 'ovs-vsctl -- set Bridge', self, self.opts,
+                   'other_config:datapath-id=' + self.dpid )
+         self.cmd( 'ovs-vsctl set-fail-mode', self, self.failMode )
+         for intf in self.intfList():

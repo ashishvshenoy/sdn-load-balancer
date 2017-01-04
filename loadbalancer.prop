@@ -1,0 +1,18 @@
+floodlight.modules=\
+net.floodlightcontroller.counter.CounterStore,\
+net.floodlightcontroller.storage.memory.MemoryStorageSource,\
+net.floodlightcontroller.core.internal.FloodlightProvider,\
+net.floodlightcontroller.threadpool.ThreadPool,\
+net.floodlightcontroller.devicemanager.internal.DeviceManagerImpl,\
+net.floodlightcontroller.devicemanager.internal.DefaultEntityClassifier,\
+net.floodlightcontroller.linkdiscovery.internal.LinkDiscoveryManager,\
+net.floodlightcontroller.topology.TopologyManager,\
+net.floodlightcontroller.perfmon.PktInProcessingTime,\
+edu.wisc.cs.sdn.apps.util.ArpServer,\
+edu.wisc.cs.sdn.apps.l3routing.L3Routing,\
+edu.wisc.cs.sdn.apps.loadbalancer.LoadBalancer
+edu.wisc.cs.sdn.apps.l3routing.L3Routing.table = 1
+edu.wisc.cs.sdn.apps.loadbalancer.LoadBalancer.table = 0
+edu.wisc.cs.sdn.apps.loadbalancer.LoadBalancer.instances =\
+10.0.100.1 00:00:01:00:00:01 10.0.0.2,10.0.0.3;\
+10.0.110.1 00:00:01:10:00:01 10.0.0.4,10.0.0.6

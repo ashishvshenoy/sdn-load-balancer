@@ -1,0 +1,41 @@
+<project name="FloodlightWithApps" default="dist">
+    <!-- For using jdk 1.6 for compiling -->
+    <property name="ant.build.javac.source" value="1.6"/>
+    <property name="ant.build.javac.target" value="1.6"/>
+
+    <target name="floodlight">
+        <ant dir="floodlight-plus/" />
+    </target>
+
+    <target name="init">
+        <mkdir dir="bin/" />
+    </target>
+
+    <target name="compile" depends="init,floodlight">
+        <javac includeantruntime="false" srcdir="src/" destdir="bin/"
+            debug = "on">
+            <classpath>
+                <fileset dir="floodlight-plus/target/" 
+                    includes="floodlight.jar" />
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="dist" depends="compile">
+        <jar destfile="${ant.project.name}.jar">
+            <manifest>
+                <attribute name="Main-Class" 
+                    value="net.floodlightcontroller.core.Main" />
+                <attribute name="Class-Path" value="." />
+            </manifest>
+            <fileset dir="bin/" />
+            <zipgroupfileset dir="floodlight-plus/target/" 
+                includes="floodlight.jar" />
+        </jar>
+    </target>
+	
+    <target name="clean">
+        <delete dir="bin/" />
+        <delete file="${ant.project.name}.jar" />
+    </target>    
+</project>
